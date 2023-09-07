@@ -84,7 +84,7 @@ export function Mermaid({ chart }: MermaidProps) {
 
   useEffect(() => {
     drawChart(chart, theme);
-  }, [chart]);
+  }, [theme,chart]);//gkiri changed from original=[chart]
 
   const handleThemeChange = async (value: Theme) => {
     setTheme(value);
@@ -106,8 +106,8 @@ export function Mermaid({ chart }: MermaidProps) {
   };
 
   return (
-    <div className="w-full">
-      <div className="absolute right-0 px-4 py-2 text-xs font-sans flex items-center justify-center">
+    <div className="w-full relative">
+        <div className="flex justify-end items-center px-4 py-2 text-xs font-sans">
         <Select value={theme} onValueChange={handleThemeChange}>
           <SelectTrigger className="w-[180px] mr-2 h-8">
             <Palette className="h-4 w-4" />
