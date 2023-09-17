@@ -7,11 +7,11 @@ import { useEffect, useRef, useState } from "react";
 //import type { Theme } from "@/types/type";//adding the types directly below
 
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "./select";
 
 interface MermaidProps {
