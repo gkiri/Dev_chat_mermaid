@@ -66,7 +66,7 @@ class Brain(Repository):
         for item in response.data:
             user_brains.append(
                 MinimalBrainEntity(
-                    id=item["brains"]["id"],
+                    id=item["brains"]["id"], 
                     name=item["brains"]["name"],
                     rights=item["rights"],
                 )

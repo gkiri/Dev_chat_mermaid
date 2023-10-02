@@ -335,4 +335,79 @@ async def get_chat_history_handler(
     chat_id: UUID,
 ) -> List[GetChatHistoryOutput]:
     # TODO: RBAC with current_user
+    print("Gkiri::/chat/chat_id/history route called..........!")
+    logger.info("Gkiri::/chat/chat_id/history route called..........!")
+    return get_chat_history(str(chat_id))
+
+# get chat history
+@chat_router.get(
+    "/chat/history2", dependencies=[Depends(AuthBearer())], tags=["Chat"]
+)
+async def get_chat_history_handler2(
+) -> List[GetChatHistoryOutput]:
+    # TODO: RBAC with current_user
+    chat_id='ef056c9d-736f-4531-aaba-4a1b2cf23d36'
+    print("Gkiri::/chat/history2 route called..........!")
+    logger.info("Gkiri::/chat/history2 route called..........!")
+    return get_chat_history(str(chat_id))
+
+
+
+from pydantic import BaseModel
+class SummarizeInput(BaseModel):
+    text: str
+
+class SummarizeOutput(BaseModel):
+    summarizedText: str
+
+@chat_router.post(
+    "/chat/summarize2",
+    response_model=SummarizeOutput,  # Defines the shape of the response
+    tags=["Chat"],
+)
+async def summarize_text(input: SummarizeInput)-> SummarizeOutput:
+    #text = input
+
+    summary ="Hello summary world.....!"
+    print("Gkiri::summarize_handler /chat/summarize invoked")
+    return SummarizeOutput(summarizedText=summary)
+
+
+# add new question to chat
+@chat_router.post(
+    "/chat/summarize",
+    tags=["Chat"],
+)
+async def create_summarize_handler(
+    request: Request,
+) :
+
+    summary ="Hello summary world.....!"
+    print("Gkiri::summarize_handler /chat/summarize invoked")
+    logger.info(f"Gkiri::summarize_handler /chat/summarize invoked")
+    return SummarizeOutput(summarizedText=summary)
+
+# # create new chat
+# @chat_router.post("/chat/summary", dependencies=[Depends(AuthBearer())], tags=["Chat"])
+# async def create_summary_handler(
+#     chat_data: CreateChatProperties,
+#     current_user: UserIdentity = Depends(get_current_user),
+# ):
+#     """
+#     Create a new chat with initial chat messages.
+#     """
+#     print("Gkiri::summarize_handler /chat/summary invoked")
+#     return "Hello summary world /chat/summary ..!"
+
+
+# get chat history
+@chat_router.get(
+    "/chat/{chat_id}/history2", dependencies=[Depends(AuthBearer())], tags=["Chat"]
+)
+async def get_chat_history_handler2(
+    chat_id: UUID,
+) -> List[GetChatHistoryOutput]:
+    # TODO: RBAC with current_user
+    print("Gkiri::/chat/chat_id/history2 route called..........!")
+    logger.info("Gkiri::/chat/chat_id/history2 route called..........!")
     return get_chat_history(str(chat_id))
