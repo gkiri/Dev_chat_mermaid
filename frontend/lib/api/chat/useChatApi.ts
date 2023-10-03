@@ -1,6 +1,7 @@
 import { useAxios } from "@/lib/hooks";
 
 import {
+  addMermaidQuestion,
   addQuestion,
   AddQuestionParams,
   ChatUpdatableProperties,
@@ -8,7 +9,8 @@ import {
   deleteChat,
   getChats,
   getHistory,
-  updateChat,
+  summaryChat,
+  updateChat
 } from "./chat";
 
 // TODO: split './chat.ts' into multiple files, per function for example
@@ -18,10 +20,13 @@ export const useChatApi = () => {
 
   return {
     createChat: async (chatName: string) => createChat(chatName, axiosInstance),
+    summaryChat:async (chatName: string) => summaryChat(chatName, axiosInstance),
     getChats: async () => getChats(axiosInstance),
     deleteChat: async (chatId: string) => deleteChat(chatId, axiosInstance),
     addQuestion: async (props: AddQuestionParams) =>
-      addQuestion(props, axiosInstance),
+      addQuestion(props, axiosInstance),  
+    addMermaidQuestion: async (props: AddQuestionParams) =>
+      addMermaidQuestion(props, axiosInstance),
     getHistory: async (chatId: string) => getHistory(chatId, axiosInstance),
     updateChat: async (chatId: string, props: ChatUpdatableProperties) =>
       updateChat(chatId, props, axiosInstance),

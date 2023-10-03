@@ -6,7 +6,13 @@ import { useChatContext } from "@/lib/context";
 import { ChatMessage } from "./components";
 import { useChatMessages } from "./hooks/useChatMessages";
 
-export const ChatMessages = (): JSX.Element => {
+// Ensure that you also update the type for the props to include `setShowSecondChat`:
+type ChatMessagesProps = {
+  setShowSecondChat: React.Dispatch<React.SetStateAction<boolean>>;
+  setSummarizedText: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export const ChatMessages = ({ setShowSecondChat,setSummarizedText}): JSX.Element => {
   const { history } = useChatContext();
   const { t } = useTranslation(["chat"]);
   const { chatListRef } = useChatMessages();
@@ -45,6 +51,8 @@ export const ChatMessages = (): JSX.Element => {
                   text={user_message}
                   promptName={prompt_title}
                   brainName={brain_name}
+                  setShowSecondChat={setShowSecondChat}
+                  setSummarizedText={setSummarizedText}
                 />
                 <ChatMessage
                   key={`assistant-${message_id}`}
@@ -52,6 +60,8 @@ export const ChatMessages = (): JSX.Element => {
                   text={assistant}
                   brainName={brain_name}
                   promptName={prompt_title}
+                  setShowSecondChat={setShowSecondChat}
+                  setSummarizedText={setSummarizedText}
                 />
               </React.Fragment>
             )
@@ -61,3 +71,4 @@ export const ChatMessages = (): JSX.Element => {
     </div>
   );
 };
+
