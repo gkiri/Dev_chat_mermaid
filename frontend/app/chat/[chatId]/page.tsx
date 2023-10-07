@@ -1,6 +1,6 @@
 "use client";
 
-import { Maximize } from "lucide-react";
+import { Maximize, Minimize2 } from "lucide-react";
 import { useState } from "react"; // Add this for state management
 
 import "./chat.css";
@@ -56,7 +56,7 @@ const SelectedChatPage = (): JSX.Element => {
                       onClick={() => setShowSecondChat(!showSecondChat)}
                       //className="minimize-button"
                   >
-                      —
+                    <Minimize2 className="h-4 w-4"/>
                   </button>
                   
                   <button onClick={() => setIsClosed(true)}>X</button>
