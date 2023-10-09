@@ -8,6 +8,7 @@ import explore_en from "../../../public/locales/en/explore.json";
 import invitation_en from "../../../public/locales/en/invitation.json";
 import login_en from "../../../public/locales/en/login.json";
 import logout_en from "../../../public/locales/en/logout.json";
+import mockexams_en from "../../../public/locales/en/mockexams.json";
 import signUp_en from "../../../public/locales/en/signUp.json";
 import translation_en from "../../../public/locales/en/translation.json";
 import updatePassword_en from "../../../public/locales/en/updatePassword.json";
@@ -92,6 +93,7 @@ export type Translations = {
   config: typeof import("../../../public/locales/en/config.json");
   delete_brain: typeof import("../../../public/locales/en/deleteBrain.json");
   explore: typeof import("../../../public/locales/en/explore.json");
+  mockexams: typeof import("../../../public/locales/en/mockexams.json");
   invitation: typeof import("../../../public/locales/en/invitation.json");
   login: typeof import("../../../public/locales/en/login.json");
   logout: typeof import("../../../public/locales/en/logout.json");
@@ -118,6 +120,7 @@ export const resources: Record<SupportedLanguages, Translations> = {
     chat: chat_en,
     config: config_en,
     explore: explore_en,
+    mockexams: mockexams_en,
     invitation: invitation_en,
     login: login_en,
     logout: logout_en,

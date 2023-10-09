@@ -1,0 +1,96 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* Use the full viewport height */
+}
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+}
+
+.middle-section {
+  display: flex;
+  justify-content: center;
+  /* This centers the main question window */
+  padding: 10px;
+}
+
+
+.left-sidebar {
+  flex: 0 0 30%;
+  /* 30% of the container width, does not grow or shrink */
+  overflow-y: auto;
+  /* Scrollable */
+  border-right: 1px solid #ccc;
+  padding: 10px;
+}
+
+.main-question-window {
+  width: 70%;
+  /* Adjust this based on your aesthetic preference */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  /* This ensures that the inner content doesn't spill out */
+}
+
+.question-content {
+  padding: 20px;
+  /* Space around the actual question and its options */
+}
+
+.bottom-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+}
+
+.left-sidebar {
+  /* Existing styles */
+  border-right: 1px solid #ddd;
+  padding-right: 20px;
+  width: 30%;
+  overflow-y: auto;
+}
+
+.left-sidebar-header {
+  background-color: #007BFF;
+  /* You can choose any color you prefer */
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px 5px 0 0;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Style to highlight the active question in the left sidebar */
+.active-question {
+  background-color: #5e5e5d;
+  padding: 5px;
+  margin: 5px 0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.question-preview {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* Number of lines to display */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 5px;
+  /* Optional padding for better spacing */
+  border-bottom: 1px solid #ddd;
+  /* Optional border for visual separation */
+}
