@@ -10,10 +10,6 @@ const MockExamsPage = (): JSX.Element => {
   const [loading, setLoading] = useState(true);
   const [isQuestionListVisible, setIsQuestionListVisible] = useState(true);
   const [examFinished, setExamFinished] = useState(false);
-  const [examStarted, setExamStarted] = useState(() => {
-    return localStorage.getItem("remainingTime") ? true : false;
-  });
-  
 
   const [remainingTime, setRemainingTime] = useState(() => {
     if (examFinished) {return 0;}
