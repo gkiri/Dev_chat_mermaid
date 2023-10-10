@@ -5,6 +5,10 @@
   /* Use the full viewport height */
 }
 
+.toggleButton {
+  z-index: 10;
+}
+
 .top-header {
   display: flex;
   justify-content: space-between;
@@ -14,35 +18,67 @@
 }
 
 .middle-section {
+  position: relative;
   display: flex;
   justify-content: center;
-  /* This centers the main question window */
+  align-items: flex-start;
   padding: 10px;
+  height: calc(100vh - height_of_other_elements);
+  /* Adjust this according to other elements on your page */
 }
 
+
+.middle-section.no-sidebar .main-question-window {
+  /* You can add any additional styles here to adjust the main question window when the sidebar is hidden. */
+  margin: 0 auto;
+  /* This is a common method to horizontally center block-level elements */
+
+}
 
 .left-sidebar {
-  flex: 0 0 30%;
-  /* 30% of the container width, does not grow or shrink */
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 30%;
+  /* Adjust this according to your design */
   overflow-y: auto;
-  /* Scrollable */
   border-right: 1px solid #ccc;
-  padding: 10px;
+  padding-right: 20px;
+  z-index: 5;
 }
 
+
 .main-question-window {
-  width: 70%;
+  width: 1200px;
+  height: 800px;
   /* Adjust this based on your aesthetic preference */
-  border: 1px solid #ddd;
+  border: 4px solid #ddd;
   border-radius: 5px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
   /* This ensures that the inner content doesn't spill out */
+  max-width: 90%;
+  /* Shifts the main question window to the right */
+}
+
+.main-question-window.centered {
+  width: 90%;
+  /* Adjust this percentage based on your preference when sidebar is not visible */
+}
+
+.main-question-window.with-sidebar {
+  margin-left: 30%;
 }
 
 .question-content {
   padding: 20px;
   /* Space around the actual question and its options */
+  flex: 1;
 }
 
 .bottom-footer {
@@ -53,13 +89,7 @@
   color: #fff;
 }
 
-.left-sidebar {
-  /* Existing styles */
-  border-right: 1px solid #ddd;
-  padding-right: 20px;
-  width: 30%;
-  overflow-y: auto;
-}
+
 
 .left-sidebar-header {
   background-color: #007BFF;
@@ -93,4 +123,18 @@
   /* Optional padding for better spacing */
   border-bottom: 1px solid #ddd;
   /* Optional border for visual separation */
+}
+
+.exam-finished-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* Full viewport height */
+  font-size: 24px;
+  /* Increased font size for visibility */
+  font-weight: bold;
+  /* Bold text */
+  text-align: center;
+  /* Center aligned text */
 }
