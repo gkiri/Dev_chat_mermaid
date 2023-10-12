@@ -17,7 +17,7 @@ type ChatMessageProps = {
   brainName?: string | null;
   promptName?: string | null;
   setShowSecondChat: React.Dispatch<React.SetStateAction<boolean>>;
-  setSummarizedText: React.Dispatch<React.SetStateAction<string>>;
+  setSummarizedText: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 
@@ -28,6 +28,7 @@ export const ChatMessage = React.forwardRef(
   ) => {
     
     //const [summarizedText, setSummarizedText] = React.useState<string | null>(null);
+    //const [summarizedText, setSummarizedText] = React.useState<string>('');
     const [loading, setLoading] = React.useState<boolean>(false);
     const { summaryChat, addMermaidQuestion } = useChatApi();  
 
@@ -54,9 +55,21 @@ export const ChatMessage = React.forwardRef(
         console.log('Gkiri:ChatMessage.tsx setShowSecondChat=', setShowSecondChat);
         //console.log('Gkiri:ChatMessage.tsx setSummarizedText=', summarizedText);
         console.log('Gkiri:Mermaid chatId=,brainID=',chatId, defaultBrainId);
-        const response = await addMermaidQuestion({ chatId, chatQuestion, brainId:defaultBrainId });
-        console.log('Gkiri:Mermaid response.assistant=', response.assistant);
-        setSummarizedText(response.assistant);  // Set the summarized text to with response
+        if (chatId) {
+          const response = await addMermaidQuestion({
+              chatId,
+              chatQuestion,
+              brainId: defaultBrainId || " "
+          });
+          console.log('Gkiri:Mermaid response.assistant=', response.assistant);
+          setSummarizedText(response.assistant);  // Set the summarized text to with response
+        } else {
+            // Handle the scenario where chatId is undefined
+            console.error('chatId is not defined!');
+        }
+      
+      
+
       } catch (error) {
         console.error('Error summarizing text:', error);
       } finally { 

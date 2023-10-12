@@ -5,20 +5,36 @@ import "./mock.css";
 
 const MockExamsPage = (): JSX.Element => {
   const {t} = useTranslation(["translation", "mockexams"]);
-  const [questions, setQuestions] = useState([]);
+
+  type QuestionType = {
+    "Question Number": string;
+    Question: string;
+    "Correct Answer": string;
+    "Answer Justification": string;
+    option_a: string;
+    option_b: string;
+    option_c: string;
+    option_d: string;
+  };
+  const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [isQuestionListVisible, setIsQuestionListVisible] = useState(true);
   const [examFinished, setExamFinished] = useState(false);
 
-  const [remainingTime, setRemainingTime] = useState(() => {
+  
+  type AnswersType = {
+    [key: number]: string;
+  };
+  
+  const [remainingTime, setRemainingTime] = useState<number>(() => {
     if (examFinished) {return 0;}
     const savedTime = localStorage.getItem("remainingTime");
 
     return savedTime ? JSON.parse(savedTime) : 2 * 60 * 60;
   });
 
-  const [answers, setAnswers] = useState(() => {
+  const [answers, setAnswers] = useState<AnswersType>(() => {
       if (examFinished) {return {};}
       const savedAnswers = localStorage.getItem("answers");
 
@@ -27,8 +43,8 @@ const MockExamsPage = (): JSX.Element => {
 
 
   // Handling answer change
-  const handleAnswerChange = (questionNumber, selectedOption) => {
-    setAnswers(prevAnswers => ({
+  const handleAnswerChange = (questionNumber: number, selectedOption: string) => {
+    setAnswers((prevAnswers: AnswersType) => ({
       ...prevAnswers,
       [questionNumber]: selectedOption
     }));
@@ -39,7 +55,7 @@ const MockExamsPage = (): JSX.Element => {
     const finalAnswers = {...answers};
     questions.forEach(q => {
         if (!finalAnswers.hasOwnProperty(q["Question Number"])) {
-            finalAnswers[q["Question Number"]] = "-";
+          finalAnswers[Number(q["Question Number"])] = "-";
         }
     });
 
@@ -61,7 +77,7 @@ const MockExamsPage = (): JSX.Element => {
 
   useEffect(() => {
     const timerId = setInterval(() => {
-      setRemainingTime(prevTime => {
+      setRemainingTime((prevTime: number) => {
         if (prevTime <= 1) {
           clearInterval(timerId);
           // End the exam here
@@ -335,7 +351,7 @@ const MockExamsPage = (): JSX.Element => {
       }
     ];
 
-    const initialAnswers = {};
+    const initialAnswers: Record<string, string> = {};
     hardcodedQuestions.forEach(q => {
       if (!answers.hasOwnProperty(q["Question Number"])) {
         initialAnswers[q["Question Number"]] = "-";
@@ -416,11 +432,11 @@ const MockExamsPage = (): JSX.Element => {
                                                 type="radio" 
                                                 name={`question-${currentQuestion["Question Number"]}`} 
                                                 value={optionKey} 
-                                                onChange={() => handleAnswerChange(currentQuestion["Question Number"], optionKey)} 
-                                                checked={answers[currentQuestion["Question Number"]] === optionKey}
+                                                onChange={() => handleAnswerChange(Number(currentQuestion["Question Number"]), optionKey)} 
+                                                checked={answers[Number(currentQuestion["Question Number"])] === optionKey}
                                             />
                                             <label>
-                                                {optionKey.toUpperCase()}. {currentQuestion[`option_${optionKey}`]}
+                                            {optionKey.toUpperCase()}. {currentQuestion[`option_${optionKey}` as keyof typeof currentQuestion]}
                                             </label>
                                         </div>
                                     ))}

@@ -9,10 +9,10 @@ import { useChatMessages } from "./hooks/useChatMessages";
 // Ensure that you also update the type for the props to include `setShowSecondChat`:
 type ChatMessagesProps = {
   setShowSecondChat: React.Dispatch<React.SetStateAction<boolean>>;
-  setSummarizedText: React.Dispatch<React.SetStateAction<string>>;
+  setSummarizedText: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-export const ChatMessages = ({ setShowSecondChat,setSummarizedText}): JSX.Element => {
+export const ChatMessages = ({ setShowSecondChat,setSummarizedText}:ChatMessagesProps): JSX.Element => {
   const { history } = useChatContext();
   const { t } = useTranslation(["chat"]);
   const { chatListRef } = useChatMessages();

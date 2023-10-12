@@ -6,7 +6,7 @@ import { ShortCuts } from "./ShortCuts";
 
 type ChatDialogProps = {
   setShowSecondChat: React.Dispatch<React.SetStateAction<boolean>>;
-  setSummarizedText: React.Dispatch<React.SetStateAction<string>>;
+  setSummarizedText: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 export const ChatDialog = ({ setShowSecondChat, setSummarizedText}: ChatDialogProps): JSX.Element => {
